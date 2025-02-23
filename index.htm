@@ -3,10 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Turbo.Az: avtomobil almaq,satmaq,təzə və işlənmiş avtomobillərin...</title>
+    <link href="https://fonts.cdnfonts.com/css/helvetica-neue-55" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="output.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-<body>
-    <h1 class="text-2xl">ReOne</h1>
+<body class="bg-[#f9f9fb]" style="position: relative;">
+    <header style="border-bottom: solid 1px #eaebf2;" class="px-3 p-2 bg-white">
+        <div class="container flex justify-between items-center ">
+            <div class="siteTitles  uppercase flex gap-4">
+                <ul class="flex" id="ul">
+                    <li class="px-3 py-2  "><a style="font-weight: 500;" class=" font-[Helveticabold] text-[#ca1016] text-[1.1em]" href="#">Turbo.az</a></li>
+                    <li class="px-3 py-2 border-l-2 "><a style="font-weight: 500;" class=" font-[Helveticabold] text-[#8d94ad] text-[1.1em]" href="#">Bina.az</a></li>
+                    <li class="px-3 py-2 text-[#8d94ad] border-l-2  "><a class=" font-[Helveticabold] text-[#8d94ad] text-[1.1em]" href="#">Tap.az</a></li>
+                </ul>
+            </div>
+            <div  class="newCarBtn py-6 flex justify-center items-center cursor-pointer">
+                <img src="img/download.svg" width="26px" alt="">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container pt-4" style="padding: 8px 15px 15px; " >
+            <div id="choices">
+                <div class="MarksFilter w-full bg-white border rounded-[13px] px-[15px]">
+                    <div id="allMarks"  onclick="filtrMark()" class=" title flex py-5 justify-between cursor-pointer">
+                        <div class=" flex ">
+                        <span class=" pt-1"><img src="img/car.svg" alt=""></span>
+                        <p class="mx-2">Bütün Markalar</p>
+                        </div> 
+                        <div class="chevron-down">
+                            <i class="fa-solid fa-chevron-down"></i>   
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="filterCar" class="title flex py-5 cursor-pointer">
+                        <span class=" pt-1"><img src="img/filters.svg" alt=""></span>
+                        <p class="mx-2">Filtrlər</p>    
+                    </div>
+                </div>
+                <div id="Moto" class=" w-full my-3 bg-white border rounded-[13px] px-[15px]">
+                    <div class=" title flex py-5 justify-between cursor-pointer">
+                        <div class=" flex ">
+                        <p class="mx-2">Moto</p>
+                        </div> 
+                        <div class="chevron-right">
+                            <i class="fa-solid fa-chevron-right text-[#8d94ad]"></i>   
+                        </div>
+                    </div>
+                </div>
+                <div id="Catalog" class=" w-full my-3 bg-white border rounded-[13px] px-[15px]">
+                    <div class=" title flex py-5 justify-between cursor-pointer">
+                        <div class=" flex ">
+                        <p class="mx-2 flex items-center">Avtokataloq <span class="rounded-full border mx-1 bg-[#77c81d] text-white px-2 pb-1 text-[13px]">yeni</span></p>
+                        </div> 
+                        <div class="chevron-right">
+                            <i class="fa-solid fa-chevron-right text-[#8d94ad]"></i>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="countNewPost" class="pb-2">
+                <p>Bu gün: <span class="text-[#4c88f9]">1018 yeni elan</span></p>
+            </div>
+            <div id="buyType " class="pt-2">
+                <ul class="flex justify-between">
+                    <li><a class="border-b-2" href="#">Kreditlə</a></li>
+                    <li><a class="border-b-2" href="#">Barter</a></li>
+                    <li><a class="border-b-2" href="#">Aksesuarlar</a></li>
+                    <li><a class="border-b-2" href="#">Şinlər</a></li>
+                    <li><a class="border-b-2" href="#">İcarə</a></li>
+                </ul>
+            </div>
+            <div id="Cards" class="container flex flex-wrap items-center  h-6 max-w-[1200px] mx-auto mt-4"> 
+            </div>
+        </div>
+    </main>
+    <div id="searchMark" style="height: 100vh; width: 100%; position: absolute; top: 0; display: none;" class=" bg-white">
+        <button onclick="hideDisp()">X</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
