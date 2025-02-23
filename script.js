@@ -14,10 +14,39 @@ const arr = [
     { id: 13, marka: 'Honda', qiymet: '18 500', model: 'Civic', mator: '1.8', il: '2017', reng: 'cyan', img: 'https://turbo.azstatic.com/uploads/full/2023%2F03%2F29%2F18%2F06%2F09%2F1dc0eed8-15d4-46f9-abf5-0b772be61d2d%2F98117_r2JD4f3tCYHUBNquO-VTdQ.jpg',yurus:'335 880'},
     { id: 14, marka: 'Volkswagen', qiymet: '23 200', model: 'Golf', mator: '2.0', il: '2019', reng: 'white', img: 'https://turbo.azstatic.com/uploads/full/2023%2F02%2F17%2F15%2F03%2F28%2F97566bce-3bcb-43ff-8c96-5274fdf59360%2F74622_ZZd9ojx9ZyTk5EOyx7D3wA.jpg',yurus:'224 200'}
 ]
+const carName = [
+    {name:'Mercedes',
+     img:'img/CarLogo/mercedes.png'
+    },
+    {name:'Lada(VAZ)',
+     img:'img/CarLogo/lada.png'
+    },
+    {name:'Hyundai',
+     img:'img/CarLogo/hyundai.png'
+    },
+    {name:'Kia',
+     img:'img/CarLogo/kia.png'
+    },
+    {name:'Toyota',
+     img:'img/CarLogo/toyota.png'
+    },
+    {name:'BMW',
+     img:'img/CarLogo/bmw.png'
+    },
+    {name:'Ford',
+     img:'img/CarLogo/ford.png'
+    },
+    {name:'Opel',
+     img:'img/CarLogo/opel.png'
+    }
+]
 
 const Marka = document.getElementById("allMarks")
 const cards = document.getElementById("Cards")
 const searchMark = document.getElementById("searchMark")
+const markList = document.getElementById("markList")
+const markInp = document.getElementById("markInp");
+
 
 getCar()
 
@@ -30,7 +59,7 @@ function getCar(){
                     <div class="flex flex-col justify-between">
                         <div class="p-[10px]">
                             <h2  class="font-[Helveticamedium] text-[#212c3a] text-[16px]  tracking-wide">${item.qiymet} AZN</h2>
-                            <p style="font-family: Helvetica, sans-serif;" class="text-[14px] mt-0 text-gray-800">${item.marka},${item.model}</p>
+                            <p style="font-family: Helvetica, sans-serif;" class="text-[14px] mt-0 text-gray-800">${item.marka} ${item.model}</p>
                             <p style="font-family: Helvetica, sans-serif;" class="text-[14px] text-gray-800">${item.il}  ${item.mator}  ${item.yurus}km</p>
 
                         </div>
@@ -43,10 +72,30 @@ function getCar(){
 function filtrMark(){
     searchMark.style.display = "block"
     cards.style.display = "none"
+    let kod = `<ul class="ml-4 text-[15px] font-[HelveticaLight]">`
+    carName.forEach(item=>{
+        kod+=`<li style="border-bottom:1px solid #f1f3f7" class="border-b-2 cursor-pointer flex items-center py-3">
+                    <img width="30px" class="mx-2" src="${item.img}" alt=""/>${item.name}</li>`
+    })
+    kod+=`</ul>`
+    markList.innerHTML = kod
+    
+
 
 }
 function hideDisp(){
     searchMark.style.display = "none"
     cards.style.display = "flex"
 
+}
+function getMark(){
+    let kod = `<ul class="ml-4 text-[15px] font-[HelveticaLight]">`
+    carName.filter(item=>{ 
+        (item.name).toLocaleLowerCase().includes((markInp.value).toLocaleLowerCase()) ? 
+        kod+=`<li style="border-bottom:1px solid #f1f3f7" class="border-b-2 cursor-pointer flex items-center py-3">
+                    <img width="30px" class="mx-2" src="${item.img}" alt=""/>${item.name}</li>`
+         : '';
+        markList.innerHTML=kod
+    })
+    
 }

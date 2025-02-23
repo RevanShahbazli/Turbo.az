@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body class="bg-[#f9f9fb]" style="position: relative;">
-    <header style="border-bottom: solid 1px #eaebf2;" class="px-3 p-2 bg-white">
+    <header style="border-bottom: solid 1px #eaebf2;" class="px-3  bg-white">
         <div class="container flex justify-between items-center ">
             <div class="siteTitles  uppercase flex gap-4">
                 <ul class="flex" id="ul">
@@ -77,12 +77,32 @@
                     <li><a class="border-b-2" href="#">İcarə</a></li>
                 </ul>
             </div>
-            <div id="Cards" class="container flex flex-wrap items-center  h-6 max-w-[1200px] mx-auto mt-4"> 
+            <div id="Cards" class="container  flex flex-wrap justify-center justify-items-start items-center  h-6 max-w-[1200px] mx-auto mt-4"> 
             </div>
+           
         </div>
     </main>
-    <div id="searchMark" style="height: 100vh; width: 100%; position: absolute; top: 0; display: none;" class=" bg-white">
-        <button onclick="hideDisp()">X</button>
+    <div id="searchMark" style="height: 100vh; min-height: 600px; width: 100%; position: absolute; top: 0; display: none;" class=" bg-white">
+        <div class="container   py-2">
+            <div class="searchingSec mb-2 flex">
+                <div class="prvBtn  w-1/2">
+                    <button onclick="hideDisp()"><i class="fa-solid fa-chevron-left ml-5 text-[1.2rem] text-[#a6a6a9]"></i></button> 
+                </div>
+                <div class="heading w-1/2">
+                        <h2 class=" text-[18px] font-medium text-slate-900">Marka</h2>
+                </div>
+            </div>
+            <div style="width: 97%;" class="inputMark flex rounded-[7px] px-2 mx-auto bg-[#f6f7fa] border">
+                <i class="fa-solid fa-magnifying-glass pt-4 mx-1 text-[13px] text-slate-400"></i>
+                <input id="markInp" oninput="getMark()" type="text" placeholder="Məsələn: BMW" class="bg-transparent outline-none py-2 w-full">
+            </div>
+            <hr style="background-color: #f1f3f7;" class="mt-4 ">
+        <div id="markList" >
+            <h4 class="ml-3 my-3 text-[#98999a]">Populyar</h4>
+            <ul class="ml-4 text-[15px] font-[HelveticaLight]">
+            </ul>
+        </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
