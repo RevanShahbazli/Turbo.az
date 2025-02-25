@@ -3,5 +3,23 @@
 @tailwind utilities;
 
 *{
-    font-family: HelveticaLight;
+    font-family: HelveticaLight;   
+}
+#buy{transition: .5s;}
+#buy:hover{
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    /* transform: scale(1.1); */
+}
+#overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3); /* Qara rəngli fon */
+    backdrop-filter: blur(8px); /* Arxa planı bulanıq göstərir */
+    display: none;
+    z-index: 10;
 }

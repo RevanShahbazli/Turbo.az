@@ -40,27 +40,34 @@ const carName = [
      img:'img/CarLogo/opel.png'
     }
 ]
+const basketArr = []
+
 
 const Marka = document.getElementById("allMarks")
 const cards = document.getElementById("Cards")
 const searchMark = document.getElementById("searchMark")
 const markList = document.getElementById("markList")
 const markInp = document.getElementById("markInp");
+const shoppingBasket = document.getElementById("shoppingBasket")
+const overlay = document.getElementById("overlay")
+const basketList = document.getElementById("basketList")
+const totalAmount = document.getElementById("totalAmount")
 
-
+let status = false;
 getCar()
 
 function getCar(){
     let kod = ''
     arr.forEach(item=>{
         kod +=
-            `<div class="min-w-44 mx-2 my-3 hover: rounded-md shadow-md bg-gray-50 text-gray-800">
+            `<div class=" border w-[142px]  lg:w-[176px] mx-2 my-3 relative hover: rounded-md shadow-md bg-gray-50 text-gray-800">
                     <img src="${item.img}" alt="" class="object-cover object-center w-[176px] rounded-t-md h-32 dark:bg-gray-500">
+                    <button id="buy" style="right:0;" onclick="handleBasket(${item.id})"  class="p-[10px] bg-[#ff0000] text-[#fff] absolute">Al</button>
                     <div class="flex flex-col justify-between">
-                        <div class="p-[10px]">
+                        <div class="py-[10px] px-[6px] md:px-[10px]">
                             <h2  class="font-[Helveticamedium] text-[#212c3a] text-[16px]  tracking-wide">${item.qiymet} AZN</h2>
                             <p style="font-family: Helvetica, sans-serif;" class="text-[14px] mt-0 text-gray-800">${item.marka} ${item.model}</p>
-                            <p style="font-family: Helvetica, sans-serif;" class="text-[14px] text-gray-800">${item.il}  ${item.mator}  ${item.yurus}km</p>
+                            <p style="font-family: Helvetica, sans-serif;" class="text-[14px] text-gray-800">${item.il} ${item.mator} ${item.yurus}km</p>
 
                         </div>
                     </div>
@@ -74,7 +81,7 @@ function filtrMark(){
     cards.style.display = "none"
     let kod = `<ul class="ml-4 text-[15px] font-[HelveticaLight]">`
     carName.forEach(item=>{
-        kod+=`<li style="border-bottom:1px solid #f1f3f7" class="border-b-2 cursor-pointer flex items-center py-3">
+        kod+=`<li style="border-bottom:1px solid #f1f3f7" class="border-b-2 cursor-pointer flex  items-center py-3">
                     <img width="30px" class="mx-2" src="${item.img}" alt=""/>${item.name}</li>`
     })
     kod+=`</ul>`
@@ -83,6 +90,65 @@ function filtrMark(){
 
 
 }
+
+function showBasket(){
+    shoppingBasket.style.display = 'flex'
+    shoppingBasket.style.overflow = 'hidden'
+    overlay.style.display = 'block'
+    document.body.style.overflow = 'hidden'
+
+    let kod = ''
+    let total =0
+    let qiymet = ''
+    basketArr.forEach(item=>{
+    kod+=`<li class="flex flex-col py-6 sm:flex-row sm:justify-between">
+                    <div class="flex w-full space-x-2 sm:space-x-4 p-3 rounded-xl bg-slate-200">
+                        <img class="flex-shrink-0 object-cover w-20 h-20 dark:border- rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500" src="${item.img}" alt="Masin">
+                        <div class="flex flex-col justify-between w-full pb-4">
+                            <div class="flex justify-between w-full pb-2 space-x-2">
+                                <div class="space-y-1">
+                                    <h3 class="text-lg font-semibold leading-snug text-[#000] sm:pr-8">${item.marka}</h3>
+                                    <p class="text-sm text-[#000]">${item.model}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-semibold text-[#000]">${item.qiymet} AZN</p>
+                                </div>
+                            </div>
+                            <div onclick="removeCard(${item.id})" class="flex text-sm divide-x">
+                                <button type="button" class="flex text-[#000] items-center px-2 py-1 pl-0 space-x-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 fill-current">
+                                        <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
+                                        <rect width="32" height="200" x="168" y="216"></rect>
+                                        <rect width="32" height="200" x="240" y="216"></rect>
+                                        <rect width="32" height="200" x="312" y="216"></rect>
+                                        <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
+                                    </svg>
+                                    <span class="text-[#000]">Remove</span>
+                                </button>
+                                <button type="button" class="flex items-center px-2 py-1 space-x-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 text-[#ff0000] fill-current">
+                                        <path d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z"></path>
+                                    </svg>
+                                    <span class="text-[#000]">Add to favorites</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>`
+                qiymet = item.qiymet.replace(/\s+/g, '');
+                total+=parseInt(qiymet)
+    })
+    basketList.innerHTML = kod
+    totalAmount.innerHTML = `${total} AZN`    
+
+
+}
+ function hideShopCard(){
+    shoppingBasket.style.display = 'none'
+    overlay.style.display = 'none'
+    document.body.style.overflow = 'scroll'
+}
+
 function hideDisp(){
     searchMark.style.display = "none"
     cards.style.display = "flex"
@@ -97,5 +163,16 @@ function getMark(){
          : '';
         markList.innerHTML=kod
     })
+    
+}
+function handleBasket(x){
+   const product = arr.find(item=> item.id == x )
+   basketArr.push(product)
+}
+
+function removeCard(x){
+   let index = basketArr.findIndex(item=> item.id==x)
+    basketArr.splice(index,1)
+    showBasket()        
     
 }
