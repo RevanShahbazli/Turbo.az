@@ -55,10 +55,10 @@ const totalAmount = document.getElementById("totalAmount")
 
 let status = false;
 getCar()
-
 function getCar(){
     let kod = ''
     arr.forEach(item=>{
+        item.count = 1;
         kod +=
             `<div class=" border w-[142px]  lg:w-[176px] mx-2 my-3 relative hover: rounded-md shadow-md bg-gray-50 text-gray-800">
                     <img src="${item.img}" alt="" class="object-cover object-center w-[176px] rounded-t-md h-32 dark:bg-gray-500">
@@ -109,6 +109,10 @@ function showBasket(){
                                 <div class="space-y-1">
                                     <h3 class="text-lg font-semibold leading-snug text-[#000] sm:pr-8">${item.marka}</h3>
                                     <p class="text-sm text-[#000]">${item.model}</p>
+                                    <button onclick="countChange(-1, ${item.id})" class="px-[5px] py-[0] border-[#000] outline rounded-[5px]  text-[#000]">-</button>
+                                     <span class="mx-[2] text-[#000]">${item.count}</span>
+                                    <button onclick="countChange(1, ${item.id})"  class="px-[5px] py-[0] border-[#000] outline rounded-[5px]  text-[#000]">+</button>
+                                     
                                 </div>
                                 <div class="text-right">
                                     <p class="text-lg font-semibold text-[#000]">${item.qiymet} AZN</p>
@@ -135,7 +139,7 @@ function showBasket(){
                         </div>
                     </div>
                 </li>`
-                qiymet = item.qiymet.replace(/\s+/g, '');
+                qiymet = (+item.qiymet.replace(/\s+/g, '')) * (item.count) ;
                 total+=parseInt(qiymet)
     })
     basketList.innerHTML = kod
@@ -167,7 +171,7 @@ function getMark(){
 }
 function handleBasket(x){
    const product = arr.find(item=> item.id == x )
-   basketArr.push(product)
+   basketArr.includes(product) ? product.count++ : basketArr.push(product);   
 }
 
 function removeCard(x){
@@ -175,4 +179,19 @@ function removeCard(x){
     basketArr.splice(index,1)
     showBasket()        
     
+}
+
+function countChange(n,id){
+const filtrItem = basketArr.filter(item=> item.id == id);
+if(n==-1){
+    if(filtrItem[0].count==1){
+        filtrItem[0].count=1
+    }
+    else{
+     filtrItem[0].count+=n;  
+    }
+}
+else filtrItem[0].count+=n; 
+
+showBasket()
 }
