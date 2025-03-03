@@ -52,7 +52,9 @@ const shoppingBasket = document.getElementById("shoppingBasket")
 const overlay = document.getElementById("overlay")
 const basketList = document.getElementById("basketList")
 const totalAmount = document.getElementById("totalAmount")
-
+const carFilter = document.getElementById("carFilter")
+const filtrOp1 = document.getElementById("filtrOp1");
+const slider = document.querySelector(".swiper-wrapper")
 let status = false;
 getCar()
 function getCar(){
@@ -118,8 +120,8 @@ function showBasket(){
                                     <p class="text-lg font-semibold text-[#000]">${item.qiymet} AZN</p>
                                 </div>
                             </div>
-                            <div onclick="removeCard(${item.id})" class="flex text-sm divide-x">
-                                <button type="button" class="flex text-[#000] items-center px-2 py-1 pl-0 space-x-1">
+                            <div  class="flex text-sm divide-x">
+                                <button onclick="removeCard(${item.id})" type="button" class="flex text-[#000] items-center px-2 py-1 pl-0 space-x-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 fill-current">
                                         <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
                                         <rect width="32" height="200" x="168" y="216"></rect>
@@ -195,3 +197,38 @@ else filtrItem[0].count+=n;
 
 showBasket()
 }
+let flag = false
+// function showFilter(){
+//     flag =! flag;
+//     allFilters.style.display = flag ?   'block' : "block"
+// }
+function chooseMark(){
+    let kod = ''
+    carName.forEach(item=>{
+    kod+=`<option value="${item.name}">${item.name}</option>`
+    })
+    filtrOp1.innerHTML = kod  
+
+}
+chooseMark()
+
+function getSlide(){
+    let kod = ""
+    arr.forEach(item=>{
+        kod+=`<div class="swiper-slide">
+         <div class=" border w-[142px]  lg:w-[176px] mx-2 my-3 relative hover: rounded-md shadow-md bg-gray-50 text-gray-800">
+                    <img src="${item.img}" alt="" class="object-cover object-center w-[176px] rounded-t-md h-32 dark:bg-gray-500">
+                    <div class="flex flex-col justify-between">
+                        <div class="py-[10px] px-[6px] md:px-[10px]">
+                            <h2  class="font-[Helveticamedium] text-[#212c3a] text-[16px]  tracking-wide">${item.qiymet} AZN</h2>
+                            <p style="font-family: Helvetica, sans-serif;" class="text-[14px] mt-0 text-gray-800">${item.marka} ${item.model}</p>
+                            <p style="font-family: Helvetica, sans-serif;" class="text-[14px] text-gray-800">${item.il} ${item.mator} ${item.yurus}km</p>
+
+                        </div>
+                    </div>
+                </div>
+        </div>`
+    })
+    slider.innerHTML = kod
+}
+getSlide()

@@ -6,6 +6,8 @@
     <title>Turbo.Az: avtomobil almaq,satmaq,təzə və işlənmiş avtomobillərin...</title>
     <link href="https://fonts.cdnfonts.com/css/helvetica-neue-55" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="output.css">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -39,9 +41,26 @@
                         </div>
                     </div>
                     <hr>
-                    <div id="filterCar" class="title flex py-5 cursor-pointer">
-                        <span class=" pt-1"><img src="img/filters.svg" alt=""></span>
-                        <p class="mx-2">Filtrlər</p>    
+                    <div id="filterCar" ondblclick="chooseMark()" class="title py-5 cursor-pointer">
+                        <div class="flex">
+                            <span class=" pt-1"><img src="img/filters.svg" alt=""></span>
+                            <button href="filter.htm"  class="mx-2">Filtrlər</button>
+                        </div>
+                        <div id="allFilters" class=" py-[30px] hidden" >
+                            <div class="">
+                                <select id="filtrOp1" onchange="chooseMark()" class="border-[#666] md:flex outline-[#aaa] my-[5px] p-[8px] rounded-[10px] outline">
+                                    
+                                </select>
+                            </div>
+                            <div id="priceInterval" class="">
+                                <p class="text-center">İstədiyiniz qiymət aralığını seçin</p>
+                                <input class="outline-[#333] border-[#333] p-[5px] " type="number" placeholder="Min:"/>
+                                <input class="outline-[#333] border-[#000] p-[5px] " type="number" placeholder="Max:"/>
+                            </div>
+                            <div class="submitBtn ">
+                                <button class="border outline-none bg-teal-600 text-[#fff] p-[10px] rounded-[10px]">Filterlə</button>
+                            </div>
+                        </div>   
                     </div>
                 </div>
                 <div id="Moto" class=" w-full my-3 bg-white border rounded-[13px] px-[15px]">
@@ -68,6 +87,11 @@
             <div id="countNewPost" class="pb-2">
                 <p>Bu gün: <span class="text-[#4c88f9]">1018 yeni elan</span></p>
             </div>
+            <div class="swiper mySwiper ">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">Slide 1</div>
+                </div>
+              </div>
             <div id="buyType " class="pt-2">
                 <ul class="flex justify-between">
                     <li><a class="border-b-2" href="#">Kreditlə</a></li>
@@ -126,6 +150,30 @@
         </div>
     </div>
     <div id="overlay"></div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+          slidesPerView: 4,
+          spaceBetween: 30,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          breakpoints: {
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 50,
+          }},
+        });
+      </script>
     <script src="script.js"></script>
 </body>
 </html>
